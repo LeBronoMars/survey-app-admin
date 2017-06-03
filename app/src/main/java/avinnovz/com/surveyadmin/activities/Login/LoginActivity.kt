@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import avinnovz.com.surveyadmin.R
+import avinnovz.com.surveyadmin.activities.Home.HomeActivity
 import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.base.BaseApplication
 import avinnovz.com.surveyadmin.models.request.Login
@@ -68,7 +69,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     }
 
     override fun onLoginSuccess(loginResponse: LoginResponse) {
-        Log.d("login", "on activity ${loginResponse.token}")
-        showToast("Welcome!")
+        moveToOtherActivity(HomeActivity::class.java)
     }
 }

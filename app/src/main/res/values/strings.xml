@@ -6,4 +6,10 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
 
+    <!-- home screen -->
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="bottom_menu_groups">Groups</string>
+    <string name="bottom_menu_members">Members</string>
+    <string name="bottom_menu_questionnaire">Questionnaire</string>
+
 </resources>
