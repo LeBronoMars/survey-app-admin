@@ -10,6 +10,6 @@ import javax.inject.Singleton
 @Singleton
 class TokenManager @Inject constructor() {
 
-    private var loginResponse: LoginResponse? = null
+    var loginResponse: LoginResponse? = null
 
 }
