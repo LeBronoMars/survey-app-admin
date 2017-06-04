@@ -2,6 +2,7 @@ package avinnovz.com.surveyadmin.activities.Login
 
 import avinnovz.com.surveyadmin.base.BaseView
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.response.MyProfile
 import proto.com.kotlinapp.models.response.LoginResponse
 
 /**
@@ -10,10 +11,13 @@ import proto.com.kotlinapp.models.response.LoginResponse
 interface LoginContract {
 
     interface View : BaseView {
-        fun onLoginSuccess(loginResponse: LoginResponse)
+        fun onLoginSuccess()
+        fun onLoadMyProfile(myProfile: MyProfile)
     }
 
     interface Presenter {
         fun onLoginRequest(login: Login)
+
+        fun onGetMyProfile()
     }
 }

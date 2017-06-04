@@ -3,6 +3,8 @@ package avinnovz.com.surveyadmin.dagger.modules
 import android.app.Application
 import android.content.Context
 import avinnovz.com.surveyadmin.BuildConfig
+import avinnovz.com.surveyadmin.models.others.MyProfileManager
+import avinnovz.com.surveyadmin.models.others.TokenManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -71,11 +73,16 @@ class RetrofitModule(val app: Application) {
         return app
     }
 
-//
-//    @Provides
-//    @Singleton
-//    fun provideTokenManager() : TokenManager {
-//        return TokenManager()
-//    }
+    @Provides
+    @Singleton
+    fun provideTokenManager() : TokenManager {
+        return TokenManager()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyProfileManager() : MyProfileManager {
+        return MyProfileManager()
+    }
 
 }

@@ -1,8 +1,12 @@
 package avinnovz.com.surveyadmin.activities.Login
 
+import android.util.Log
 import avinnovz.com.surveyadmin.base.BasePresenterImpl
+import avinnovz.com.surveyadmin.commons.ApiActions
 import avinnovz.com.surveyadmin.helpers.ApiRequestHelper
+import avinnovz.com.surveyadmin.models.others.TokenManager
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.response.MyProfile
 import proto.com.kotlinapp.interfaces.ApiInterface
 import proto.com.kotlinapp.interfaces.OnApiRequestListener
 import proto.com.kotlinapp.models.response.GenericResponse
@@ -16,6 +20,8 @@ import javax.inject.Inject
  */
 class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: LoginContract.View):
         BasePresenterImpl(), LoginContract.Presenter, OnApiRequestListener {
+
+    @Inject lateinit var tokenManager: TokenManager
 
     private var apiRequestHelper: ApiRequestHelper? = null
     private var view: LoginContract.View? = null
@@ -36,6 +42,17 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
         }
     }
 
+    override fun onGetMyProfile() {
+        if (isNetworkAvailable()) {
+            apiRequestHelper?.apply {
+                Log.d("login", "fetch my profile")
+                myProfile(tokenManager.loginResponse!!.token)
+            }
+        } else {
+            view!!.onNoConnectionError()
+        }
+    }
+
     override fun onApiRequestBegin(action: String?) {
         action?.let {
             view!!.onShowLoading()
@@ -43,6 +60,7 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
     }
 
     override fun onApiRequestFailed(action: String?, t: Throwable) {
+        Log.d("login", "failed request --> ${t.message}")
         view!!.onDismissLoading()
         val errorMessage: String = t.message!!
 
@@ -68,7 +86,6 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
             } else {
                 view!!.onServerRelatedError()
             }
@@ -76,8 +93,14 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
     }
 
     override fun onApiRequestSuccess(action: String?, result: Any) {
-        val loginResponse: LoginResponse = result as LoginResponse
         this.view!!.onDismissLoading()
-        this.view!!.onLoginSuccess(loginResponse)
+
+        if (action!!.equals(ApiActions.LOGIN)) {
+            val loginResponse: LoginResponse = result as LoginResponse
+            tokenManager.loginResponse = loginResponse
+            this.view!!.onLoginSuccess()
+        } else if (action!!.equals(ApiActions.GET_MY_PROFILE)) {
+            this.view!!.onLoadMyProfile(result as MyProfile)
+        }
     }
 }

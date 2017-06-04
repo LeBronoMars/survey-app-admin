@@ -7,15 +7,17 @@ import avinnovz.com.surveyadmin.R
 import avinnovz.com.surveyadmin.activities.Home.HomeActivity
 import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.base.BaseApplication
+import avinnovz.com.surveyadmin.models.others.MyProfileManager
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.response.MyProfile
 import kotlinx.android.synthetic.main.activity_login.*
 import proto.com.kotlinapp.commons.AppConstants
-import proto.com.kotlinapp.models.response.LoginResponse
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginContract.View {
 
     @Inject lateinit var presenter: LoginPresenterImpl
+    @Inject lateinit var myProfileManager: MyProfileManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +70,12 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         showNoConnectionErrorDialog()
     }
 
-    override fun onLoginSuccess(loginResponse: LoginResponse) {
+    override fun onLoginSuccess() {
+        presenter.onGetMyProfile()
+    }
+
+    override fun onLoadMyProfile(myProfile: MyProfile) {
+        this.myProfileManager.myProfile = myProfile
         moveToOtherActivity(HomeActivity::class.java)
     }
 }

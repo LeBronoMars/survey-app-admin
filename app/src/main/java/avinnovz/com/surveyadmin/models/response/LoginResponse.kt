@@ -7,6 +7,7 @@ import android.os.Parcelable
  * Created by rsbulanon on 6/3/17.
  */
 data class LoginResponse(val token: String) : Parcelable {
+
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<LoginResponse> = object : Parcelable.Creator<LoginResponse> {
             override fun createFromParcel(source: Parcel): LoginResponse = LoginResponse(source)
@@ -14,8 +15,8 @@ data class LoginResponse(val token: String) : Parcelable {
         }
     }
 
-    constructor(source: Parcel) : this(
-    source.readString()
+    constructor(source: Parcel) : this (
+        source.readString()
     )
 
     override fun describeContents() = 0
