@@ -14,11 +14,19 @@ import rx.schedulers.Schedulers
  */
 class ApiRequestHelper constructor(val apiInterface: ApiInterface) {
 
+    private val BEARER: String = "Bearer "
+
     var onApiRequestListener: OnApiRequestListener? = null
 
     fun login(login: Login) {
         onApiRequestListener!!.onApiRequestBegin(ApiActions.LOGIN)
         handleObservableResult(ApiActions.LOGIN, apiInterface.login(login))
+    }
+
+    fun myProfile(token: String) {
+        onApiRequestListener!!.onApiRequestBegin(ApiActions.GET_MY_PROFILE)
+        handleObservableResult(ApiActions.GET_MY_PROFILE, apiInterface
+                .myProfile(BEARER + token))
     }
 
     fun handleObservableResult(action: String?, observable: Observable<*>) {
