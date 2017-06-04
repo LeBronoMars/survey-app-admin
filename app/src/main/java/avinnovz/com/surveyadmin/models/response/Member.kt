@@ -2,7 +2,6 @@ package avinnovz.com.surveyadmin.models.response
 
 import android.os.Parcel
 import android.os.Parcelable
-import avinnovz.com.surveyadmin.commons.createParcel
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -15,21 +14,22 @@ class Member(val id: String, val email: String,
              @SerializedName("last_name") val lastName: String,
              @SerializedName("contact_no") val contactNo: String,
              @SerializedName("pic_url") val picUrl: String) : Parcelable {
-
     companion object {
-        @JvmField @Suppress("unused")
-        val CREATOR = createParcel { Member(it) }
+        @JvmField val CREATOR: Parcelable.Creator<Member> = object : Parcelable.Creator<Member> {
+            override fun createFromParcel(source: Parcel): Member = Member(source)
+            override fun newArray(size: Int): Array<Member?> = arrayOfNulls(size)
+        }
     }
 
     constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString()
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString(),
+    source.readString()
     )
 
     override fun describeContents() = 0

@@ -7,7 +7,7 @@ import avinnovz.com.surveyadmin.commons.createParcel
 /**
  * Created by rsbulanon on 6/4/17.
  */
-class Departments(val content: List<DepartmentData>, val totalPages: Int, val totalElements: Int,
+class Departments(val content: ArrayList<DepartmentData>, val totalPages: Int, val totalElements: Int,
                   val last: Boolean, val size: Int, val number: Int,
                   val sort: String, val numberOfElements: Int, val first: Boolean) : Parcelable {
 

@@ -1,5 +1,6 @@
 package avinnovz.com.surveyadmin.fragments.Groups
 
+import android.util.Log
 import avinnovz.com.surveyadmin.base.BasePresenterImpl
 import avinnovz.com.surveyadmin.commons.ApiActions
 import avinnovz.com.surveyadmin.helpers.ApiRequestHelper
@@ -43,7 +44,7 @@ class GroupsPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: 
     }
 
     override fun onApiRequestFailed(action: String?, t: Throwable) {
-        view.onDismissLoading()
+        Log.d("groups", "request failed --> ${t.message}")
         view.onDismissLoading()
         val errorMessage: String = t.message!!
 

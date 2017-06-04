@@ -27,6 +27,9 @@ class LoginActivity : BaseActivity(), LoginContract.View {
                 .loginModule(LoginModule(this))
                 .build().inject(this)
 
+        et_username.setText("nedflanders")
+        et_password.setText("P@ssw0rd")
+
         btn_login.setOnClickListener {
             val username: String = et_username.text.toString().trim()
             val password: String = et_password.text.toString().trim()
