@@ -1,6 +1,8 @@
 package avinnovz.com.surveyadmin.interfaces
 
+import avinnovz.com.surveyadmin.models.request.NewDepartment
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.response.Department.DepartmentData
 import avinnovz.com.surveyadmin.models.response.Department.Departments
 import avinnovz.com.surveyadmin.models.response.MyProfile
 import proto.com.kotlinapp.models.response.LoginResponse
@@ -21,4 +23,9 @@ interface ApiInterface {
 
     @GET("/api/departments")
     fun getAllDepartments(@Header("Authorization") header: String): Observable<Departments>
+
+    @POST("/api/department")
+    @Headers("Content-Type: application/json")
+    fun createDepartment(@Header("Authorization") header: String,
+                         @Body newDepartment: NewDepartment): Observable<DepartmentData>
 }

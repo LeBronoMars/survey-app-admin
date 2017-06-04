@@ -3,6 +3,7 @@ package avinnovz.com.surveyadmin.models.response.Department
 import android.os.Parcel
 import android.os.Parcelable
 import avinnovz.com.surveyadmin.commons.AdapterConstants
+import avinnovz.com.surveyadmin.commons.createParcel
 import avinnovz.com.surveyadmin.interfaces.ViewType
 import avinnovz.com.surveyadmin.models.response.Member
 import com.google.gson.annotations.SerializedName
@@ -17,20 +18,18 @@ class DepartmentData(val id: String, val active: Boolean, val name: String,
     override fun getViewType(): Int = AdapterConstants.GROUPS
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<DepartmentData> = object : Parcelable.Creator<DepartmentData> {
-            override fun createFromParcel(source: Parcel): DepartmentData = DepartmentData(source)
-            override fun newArray(size: Int): Array<DepartmentData?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { DepartmentData(it) }
     }
 
     constructor(source: Parcel) : this(
-    source.readString(),
-    1 == source.readInt(),
-    source.readString(),
-    source.readString(),
-    source.createTypedArrayList(Member.CREATOR),
-    source.readString(),
-    source.readString()
+            source.readString(),
+            1 == source.readInt(),
+            source.readString(),
+            source.readString(),
+            source.createTypedArrayList(Member.CREATOR),
+            source.readString(),
+            source.readString()
     )
 
     override fun describeContents() = 0

@@ -7,6 +7,8 @@ import avinnovz.com.surveyadmin.helpers.ApiRequestHelper
 import avinnovz.com.surveyadmin.interfaces.ApiInterface
 import avinnovz.com.surveyadmin.interfaces.OnApiRequestListener
 import avinnovz.com.surveyadmin.models.others.TokenManager
+import avinnovz.com.surveyadmin.models.request.NewDepartment
+import avinnovz.com.surveyadmin.models.response.Department.DepartmentData
 import avinnovz.com.surveyadmin.models.response.Department.Departments
 import proto.com.kotlinapp.models.response.GenericResponse
 import retrofit2.adapter.rxjava.HttpException
@@ -33,6 +35,16 @@ class GroupsPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: 
         if (isNetworkAvailable()) {
             apiRequestHelper?.apply {
                 getAllDepartments(tokenManager.loginResponse!!.token)
+            }
+        } else {
+            view.onNoConnectionError()
+        }
+    }
+
+    override fun onCreateNewDepartment(newDepartment: NewDepartment) {
+        if (isNetworkAvailable()) {
+            apiRequestHelper?.apply {
+                createNewDepartment(tokenManager.loginResponse!!.token, newDepartment)
             }
         } else {
             view.onNoConnectionError()
@@ -78,6 +90,8 @@ class GroupsPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: 
         view.onDismissLoading()
         if (action!!.equals(ApiActions.GET_ALL_DEPARTMENTS)) {
             view.onLoadAllDepartments(result as Departments)
+        } else if (action!!.equals(ApiActions.POST_ADD_DEPARTMENT)) {
+            view.onLoadNewDepartment(result as DepartmentData)
         }
     }
 

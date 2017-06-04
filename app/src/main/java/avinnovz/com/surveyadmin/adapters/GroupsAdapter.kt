@@ -51,7 +51,7 @@ class GroupsAdapter(val listener: GroupsDelegateAdapter.OnSelectedDepartmentList
     }
 
     fun addGroup(group: DepartmentData) {
-        items.add(group)
+        items.add(0, group)
         notifyDataSetChanged()
     }
 

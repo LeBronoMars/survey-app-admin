@@ -1,5 +1,6 @@
 package avinnovz.com.surveyadmin.fragments.Groups
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import avinnovz.com.surveyadmin.base.BaseApplication
 import avinnovz.com.surveyadmin.commons.inflate
 import avinnovz.com.surveyadmin.delegates.GroupsDelegateAdapter
 import avinnovz.com.surveyadmin.fragments.ManageGroup.ManageGroupDialogFragment
+import avinnovz.com.surveyadmin.models.request.NewDepartment
 import avinnovz.com.surveyadmin.models.response.Department.DepartmentData
 import avinnovz.com.surveyadmin.models.response.Department.Departments
 import com.flipboard.bottomsheet.commons.MenuSheetView
@@ -27,6 +29,7 @@ class GroupsFragment : Fragment(), GroupsContract.View {
 
     @Inject lateinit var presenter: GroupsPresenterImpl
     private var baseActivity: BaseActivity? = null
+    var progressDialog: ProgressDialog? = null
 
     companion object {
         fun newInstance(): GroupsFragment {
@@ -60,6 +63,18 @@ class GroupsFragment : Fragment(), GroupsContract.View {
             })
         }
 
+        fab_add_group.setOnClickListener {
+            //add new group
+            val fragment: ManageGroupDialogFragment = ManageGroupDialogFragment.newInstance(null)
+            fragment.onManageGroupListener = object : ManageGroupDialogFragment.OnManageGroupListener {
+                override fun onManageGroup(groupName: String, description: String) {
+                    fragment.dismiss()
+                    presenter.onCreateNewDepartment(NewDepartment(groupName, description))
+                }
+            }
+            fragment.show(fragmentManager, "add group")
+        }
+
         presenter.onGetAllDepartments()
     }
 
@@ -67,7 +82,18 @@ class GroupsFragment : Fragment(), GroupsContract.View {
     }
 
     override fun onShowLoading() {
+        progressDialog?.let {
+            progressDialog = null
+        }
+        progressDialog = ProgressDialog(activity)
+        progressDialog?.apply {
+            setCancelable(false)
+            show()
+        }
+    }
 
+    override fun onLoadNewDepartment(departmentData: DepartmentData) {
+        (rv_groups.adapter as GroupsAdapter).addGroup(departmentData)
     }
 
     override fun onLoadAllDepartments(departments: Departments) {
@@ -75,6 +101,9 @@ class GroupsFragment : Fragment(), GroupsContract.View {
     }
 
     override fun onDismissLoading() {
+        progressDialog?.apply {
+            dismiss()
+        }
     }
 
     override fun onFailedToConnect() {
@@ -105,7 +134,7 @@ class GroupsFragment : Fragment(), GroupsContract.View {
                             fragment.onManageGroupListener = object : ManageGroupDialogFragment.OnManageGroupListener {
                                 override fun onManageGroup(groupName: String, description: String) {
                                     fragment.dismiss()
-                                    
+
                                 }
                             }
                             fragment.show(fragmentManager, "update group")

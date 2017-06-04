@@ -21,6 +21,6 @@
     <string name="group_name">Group name</string>
     <string name="group_description">Group description (Optional)</string>
     <string name="create_group">Create Group</string>
-    <string name="update_group_header">Upgrade group details</string>
+    <string name="update_group_header">Update group details</string>
 
 </resources>

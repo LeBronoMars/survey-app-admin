@@ -4,6 +4,7 @@ import avinnovz.com.surveyadmin.commons.ApiActions
 import avinnovz.com.surveyadmin.interfaces.ApiInterface
 import avinnovz.com.surveyadmin.interfaces.OnApiRequestListener
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.request.NewDepartment
 import com.google.gson.Gson
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -31,6 +32,11 @@ class ApiRequestHelper constructor(val apiInterface: ApiInterface) {
     fun getAllDepartments(token: String) {
         onApiRequestListener!!.onApiRequestBegin(ApiActions.GET_ALL_DEPARTMENTS)
         handleObservableResult(ApiActions.GET_ALL_DEPARTMENTS, apiInterface.getAllDepartments(BEARER + token))
+    }
+
+    fun createNewDepartment(token: String, newDepartment: NewDepartment) {
+        onApiRequestListener!!.onApiRequestBegin(ApiActions.POST_ADD_DEPARTMENT)
+        handleObservableResult(ApiActions.POST_ADD_DEPARTMENT, apiInterface.createDepartment(BEARER + token, newDepartment))
     }
 
     fun handleObservableResult(action: String?, observable: Observable<*>) {

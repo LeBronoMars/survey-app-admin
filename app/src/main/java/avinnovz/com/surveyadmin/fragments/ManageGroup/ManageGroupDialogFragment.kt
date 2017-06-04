@@ -55,7 +55,7 @@ class ManageGroupDialogFragment : DialogFragment() {
                 if (TextUtils.isEmpty(groupName)) {
                     baseActivity.setError(et_group_name, AppConstants.WARN_FIELD_REQUIRED)
                 } else {
-                    if (groupName == null) {
+                    if (department == null) {
                         onManageGroupListener?.apply {
                             onManageGroup(groupName, groupNameDesc)
                         }

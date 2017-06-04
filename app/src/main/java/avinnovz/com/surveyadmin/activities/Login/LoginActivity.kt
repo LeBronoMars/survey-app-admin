@@ -79,5 +79,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override fun onLoadMyProfile(myProfile: MyProfile) {
         this.myProfileManager.myProfile = myProfile
         moveToOtherActivity(HomeActivity::class.java)
+        finish()
     }
 }
