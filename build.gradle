@@ -57,4 +57,7 @@ ext {
 
     //java annotations
     javaxAnnotation = '1.0'
+
+    //bottom sheet
+    bottomSheet = '1.5.3'
 }

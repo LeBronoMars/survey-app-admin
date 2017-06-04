@@ -78,6 +78,10 @@ dependencies {
     compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
     provided "javax.annotation:jsr250-api:$rootProject.ext.javaxAnnotation"
 
+    //flip board bottom sheet
+    compile "com.flipboard:bottomsheet-core:$rootProject.ext.bottomSheet"
+    compile "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomSheet"
+
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'

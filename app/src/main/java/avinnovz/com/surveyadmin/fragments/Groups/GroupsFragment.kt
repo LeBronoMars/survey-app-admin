@@ -14,8 +14,10 @@ import avinnovz.com.surveyadmin.commons.inflate
 import avinnovz.com.surveyadmin.delegates.GroupsDelegateAdapter
 import avinnovz.com.surveyadmin.models.response.Department.DepartmentData
 import avinnovz.com.surveyadmin.models.response.Department.Departments
+import com.flipboard.bottomsheet.commons.MenuSheetView
 import kotlinx.android.synthetic.main.fragment_groups.*
 import javax.inject.Inject
+
 
 /**
  * Created by rsbulanon on 6/4/17.
@@ -26,7 +28,7 @@ class GroupsFragment : Fragment(), GroupsContract.View {
     private var baseActivity: BaseActivity? = null
 
     companion object {
-        fun newInstance() : GroupsFragment {
+        fun newInstance(): GroupsFragment {
             val fragment: GroupsFragment = GroupsFragment()
             return fragment
         }
@@ -51,10 +53,12 @@ class GroupsFragment : Fragment(), GroupsContract.View {
             layoutManager = LinearLayoutManager(context)
             adapter = GroupsAdapter(object : GroupsDelegateAdapter.OnSelectedDepartmentListener {
                 override fun onSelectedGroup(selectedPosition: Int, department: DepartmentData) {
-
+                    //init bottom menu
+                    showGroupMenu(department)
                 }
             })
         }
+
         presenter.onGetAllDepartments()
     }
 
@@ -86,5 +90,17 @@ class GroupsFragment : Fragment(), GroupsContract.View {
 
     override fun onNoConnectionError() {
         baseActivity!!.showNoConnectionErrorDialog()
+    }
+
+    fun showGroupMenu(deparment: DepartmentData) {
+        val menuSheetView = MenuSheetView(activity, MenuSheetView.MenuType.LIST, "Manage Department",
+                MenuSheetView.OnMenuItemClickListener { item ->
+                    if (bs_menu.isSheetShowing) {
+                        bs_menu.dismissSheet()
+                    }
+                    true
+                })
+        menuSheetView.inflateMenu(R.menu.group_menu)
+        bs_menu.showWithSheetView(menuSheetView)
     }
 }

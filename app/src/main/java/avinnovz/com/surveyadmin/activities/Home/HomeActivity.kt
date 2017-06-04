@@ -7,6 +7,7 @@ import avinnovz.com.surveyadmin.R
 import avinnovz.com.surveyadmin.adapters.ViewPagerAdapter
 import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.fragments.Groups.GroupsFragment
+import avinnovz.com.surveyadmin.fragments.Members.MembersFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity() {
@@ -17,8 +18,13 @@ class HomeActivity : BaseActivity() {
 
         val fragments: ArrayList<Fragment> = ArrayList()
         fragments.add(GroupsFragment.newInstance())
+        fragments.add(MembersFragment.newInstance())
+        fragments.add(MembersFragment.newInstance())
 
-        vp_screens.adapter = ViewPagerAdapter(supportFragmentManager, fragments)
+        vp_screens?.apply {
+            adapter = ViewPagerAdapter(supportFragmentManager, fragments)
+            offscreenPageLimit = fragments.size
+        }
 
         bnv_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
@@ -26,12 +32,15 @@ class HomeActivity : BaseActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_groups -> {
+                vp_screens.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_members -> {
+                vp_screens.currentItem = 1
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_questionnaire -> {
+                vp_screens.currentItem = 2
                 return@OnNavigationItemSelectedListener true
             }
         }

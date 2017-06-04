@@ -12,4 +12,7 @@
     <string name="bottom_menu_members">Members</string>
     <string name="bottom_menu_questionnaire">Questionnaire</string>
 
+    <!-- bottom sheet group menu -->
+    <string name="manage_members">Manage Members</string>
+    <string name="update_group">Update Group</string>
 </resources>
