@@ -3,6 +3,7 @@ package avinnovz.com.surveyadmin.models.response
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import proto.com.kotlinapp.commons.createParcel
 import java.util.*
 
 /**
@@ -27,10 +28,8 @@ class MyProfile(val id: String,
                 @SerializedName("updated_at") val updatedAt: Date) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<MyProfile> = object : Parcelable.Creator<MyProfile> {
-            override fun createFromParcel(source: Parcel): MyProfile = MyProfile(source)
-            override fun newArray(size: Int): Array<MyProfile?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { MyProfile(it) }
     }
 
     constructor(source: Parcel) : this(

@@ -21,8 +21,8 @@ android {
         }
 
         debug {
-            //buildConfigField 'String', 'HOST_NAME', '\"http://192.168.10.4:9000\"'
-            buildConfigField 'String', 'HOST_NAME', '\"http://54.251.151.101:9000\"'
+            buildConfigField 'String', 'HOST_NAME', '\"http://192.168.10.4:9000\"'
+            //buildConfigField 'String', 'HOST_NAME', '\"http://54.251.151.101:9000\"'
         }
     }
     compileOptions.incremental = false

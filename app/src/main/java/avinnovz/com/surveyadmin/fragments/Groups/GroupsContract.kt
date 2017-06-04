@@ -10,5 +10,6 @@ interface GroupsContract {
     }
 
     interface Presenter {
+
     }
 }

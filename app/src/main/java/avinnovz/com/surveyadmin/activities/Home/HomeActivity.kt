@@ -2,7 +2,6 @@ package avinnovz.com.surveyadmin.activities.Home
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
 import avinnovz.com.surveyadmin.R
 import avinnovz.com.surveyadmin.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
