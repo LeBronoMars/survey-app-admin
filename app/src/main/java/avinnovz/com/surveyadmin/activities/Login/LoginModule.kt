@@ -8,16 +8,9 @@ import dagger.Provides
  * Created by rsbulanon on 6/3/17.
  */
 @Module
-class LoginModule {
-
-    private var view: LoginContract.View? = null
-
-    constructor(view: LoginContract.View) {
-        this.view = view
-    }
+class LoginModule(val view: LoginContract.View) {
 
     @Provides
     @ForActivity
-    fun provideView() : LoginContract.View = view!!
-
+    fun provideView() : LoginContract.View = view
 }

@@ -24,10 +24,9 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
     @Inject lateinit var tokenManager: TokenManager
 
     private var apiRequestHelper: ApiRequestHelper? = null
-    private var view: LoginContract.View? = null
+    private var view: LoginContract.View = view
 
     init {
-        this.view = view
         this.apiRequestHelper = ApiRequestHelper(apiInterface)
         this.apiRequestHelper!!.onApiRequestListener = this
     }
@@ -38,69 +37,68 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
                 login(login)
             }
         } else {
-            view!!.onNoConnectionError()
+            view.onNoConnectionError()
         }
     }
 
     override fun onGetMyProfile() {
         if (isNetworkAvailable()) {
             apiRequestHelper?.apply {
-                Log.d("login", "fetch my profile")
                 myProfile(tokenManager.loginResponse!!.token)
             }
         } else {
-            view!!.onNoConnectionError()
+            view.onNoConnectionError()
         }
     }
 
     override fun onApiRequestBegin(action: String?) {
         action?.let {
-            view!!.onShowLoading()
+            view.onShowLoading()
         }
     }
 
     override fun onApiRequestFailed(action: String?, t: Throwable) {
         Log.d("login", "failed request --> ${t.message}")
-        view!!.onDismissLoading()
+        view.onDismissLoading()
         val errorMessage: String = t.message!!
 
         if (errorMessage.contains("failed to connect") || errorMessage.contains("Failed to connect")) {
-            view!!.onFailedToConnect()
+            view.onFailedToConnect()
         } else if (errorMessage.contains("timeout")) {
-            view!!.onSocketTimeout()
+            view.onSocketTimeout()
         } else if (errorMessage.contains("No address associated with hostname") || errorMessage.contains("Unable to resolve host")) {
-            view!!.onNoConnectionError()
+            view.onNoConnectionError()
         } else {
             if (t is HttpException) {
                 try {
                     val json = t.response().errorBody().string()
 
                     if (t.code() >= 500) {
-                        view!!.onServerRelatedError()
+                        view.onServerRelatedError()
                     } else {
                         val requestError:GenericResponse = apiRequestHelper!!.parseError(GenericResponse::class.java, json)
                         requestError?.apply {
-                            view!!.onShowError(action, "Login Failed", requestError.message, "Close", null)
+                            view.onShowError(action, "Login Failed", requestError.message, "Close", null)
                         }
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             } else {
-                view!!.onServerRelatedError()
+                view.onServerRelatedError()
             }
         }
     }
 
     override fun onApiRequestSuccess(action: String?, result: Any) {
-        this.view!!.onDismissLoading()
+        this.view.onDismissLoading()
 
-        if (action!!.equals(ApiActions.LOGIN)) {
+        if (action.equals(ApiActions.LOGIN)) {
             val loginResponse: LoginResponse = result as LoginResponse
             tokenManager.loginResponse = loginResponse
-            this.view!!.onLoginSuccess()
-        } else if (action!!.equals(ApiActions.GET_MY_PROFILE)) {
-            this.view!!.onLoadMyProfile(result as MyProfile)
+            this.view.onLoginSuccess()
+        } else if (action.equals(ApiActions.GET_MY_PROFILE)) {
+            this.view.onLoadMyProfile(result as MyProfile)
         }
     }
 }

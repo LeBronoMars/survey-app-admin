@@ -16,7 +16,6 @@ class Member(val id: String, val email: String,
              @SerializedName("contact_no") val contactNo: String,
              @SerializedName("pic_url") val picUrl: String) : Parcelable {
 
-
     companion object {
         @JvmField @Suppress("unused")
         val CREATOR = createParcel { Member(it) }

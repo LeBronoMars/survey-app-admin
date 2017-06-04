@@ -1,4 +1,4 @@
-package avinnovz.com.surveyadmin.models.response
+package avinnovz.com.surveyadmin.models.response.Department
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -7,16 +7,17 @@ import proto.com.kotlinapp.commons.createParcel
 /**
  * Created by rsbulanon on 6/4/17.
  */
-class BaseResponse(val totalPages: Int, val totalElements: Int,
-                   val last: Boolean, val size: Int, val number: Int,
-                   val sort: String, val numberOfElements: Int, val first: Boolean) : Parcelable {
+class Departments(val content: List<DepartmentData>, val totalPages: Int, val totalElements: Int,
+                  val last: Boolean, val size: Int, val number: Int,
+                  val sort: String, val numberOfElements: Int, val first: Boolean) : Parcelable {
 
     companion object {
         @JvmField @Suppress("unused")
-        val CREATOR = createParcel { BaseResponse(it) }
+        val CREATOR = createParcel { Departments(it) }
     }
 
     constructor(source: Parcel) : this(
+            source.createTypedArrayList(DepartmentData.CREATOR),
             source.readInt(),
             source.readInt(),
             1 == source.readInt(),
@@ -30,6 +31,7 @@ class BaseResponse(val totalPages: Int, val totalElements: Int,
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeTypedList(content)
         dest.writeInt(totalPages)
         dest.writeInt(totalElements)
         dest.writeInt((if (last) 1 else 0))
