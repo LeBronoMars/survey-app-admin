@@ -15,4 +15,12 @@
     <!-- bottom sheet group menu -->
     <string name="manage_members">Manage Members</string>
     <string name="update_group">Update Group</string>
+
+    <!-- manage group -->
+    <string name="create_group_header">Add new group</string>
+    <string name="group_name">Group name</string>
+    <string name="group_description">Group description (Optional)</string>
+    <string name="create_group">Create Group</string>
+    <string name="update_group_header">Upgrade group details</string>
+
 </resources>

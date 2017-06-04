@@ -12,6 +12,7 @@ import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.base.BaseApplication
 import avinnovz.com.surveyadmin.commons.inflate
 import avinnovz.com.surveyadmin.delegates.GroupsDelegateAdapter
+import avinnovz.com.surveyadmin.fragments.ManageGroup.ManageGroupDialogFragment
 import avinnovz.com.surveyadmin.models.response.Department.DepartmentData
 import avinnovz.com.surveyadmin.models.response.Department.Departments
 import com.flipboard.bottomsheet.commons.MenuSheetView
@@ -92,11 +93,23 @@ class GroupsFragment : Fragment(), GroupsContract.View {
         baseActivity!!.showNoConnectionErrorDialog()
     }
 
-    fun showGroupMenu(deparment: DepartmentData) {
+    fun showGroupMenu(department: DepartmentData) {
         val menuSheetView = MenuSheetView(activity, MenuSheetView.MenuType.LIST, "Manage Department",
                 MenuSheetView.OnMenuItemClickListener { item ->
                     if (bs_menu.isSheetShowing) {
                         bs_menu.dismissSheet()
+                    }
+                    when (item.itemId) {
+                        R.id.menu_update_group -> {
+                            val fragment: ManageGroupDialogFragment = ManageGroupDialogFragment.newInstance(department)
+                            fragment.onManageGroupListener = object : ManageGroupDialogFragment.OnManageGroupListener {
+                                override fun onManageGroup(groupName: String, description: String) {
+                                    fragment.dismiss()
+                                    
+                                }
+                            }
+                            fragment.show(fragmentManager, "update group")
+                        }
                     }
                     true
                 })
