@@ -1,4 +1,4 @@
-package proto.com.kotlinapp.interfaces
+package avinnovz.com.surveyadmin.interfaces
 
 /**
  * Created by rsbulanon on 6/3/17.

@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.Toast
 import avinnovz.com.surveyadmin.R
-import proto.com.kotlinapp.interfaces.OnConfirmDialogListener
+import avinnovz.com.surveyadmin.interfaces.OnConfirmDialogListener
 
 /**
  * Created by rsbulanon on 6/3/17.
@@ -108,7 +108,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 .setCancelable(cancelable)
 
         if (positiveText != null && !positiveText.isEmpty()) {
-            alertDialogBuilder.setPositiveButton(positiveText) { dialog, id ->
+            alertDialogBuilder.setPositiveButton(positiveText) { dialog, _ ->
                 onConfirmDialogListener?.apply {
                     onConfirmed(action!!)
                 }
@@ -117,7 +117,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         if (negativeText != null && !negativeText.isEmpty()) {
-            alertDialogBuilder.setNegativeButton(negativeText) { dialog, id ->
+            alertDialogBuilder.setNegativeButton(negativeText) { dialog, _ ->
                 onConfirmDialogListener?.apply {
                     onCancelled(action!!)
                 }

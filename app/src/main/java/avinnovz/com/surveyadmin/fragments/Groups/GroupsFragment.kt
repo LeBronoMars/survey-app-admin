@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import avinnovz.com.surveyadmin.R
 import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.base.BaseApplication
+import avinnovz.com.surveyadmin.commons.inflate
 import avinnovz.com.surveyadmin.models.response.Department.Departments
-import proto.com.kotlinapp.commons.inflate
 
 /**
  * Created by rsbulanon on 6/4/17.

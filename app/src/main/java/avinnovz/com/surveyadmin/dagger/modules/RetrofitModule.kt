@@ -3,6 +3,7 @@ package avinnovz.com.surveyadmin.dagger.modules
 import android.app.Application
 import android.content.Context
 import avinnovz.com.surveyadmin.BuildConfig
+import avinnovz.com.surveyadmin.interfaces.ApiInterface
 import avinnovz.com.surveyadmin.models.others.MyProfileManager
 import avinnovz.com.surveyadmin.models.others.TokenManager
 import dagger.Module
@@ -10,7 +11,6 @@ import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import proto.com.kotlinapp.interfaces.ApiInterface
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -64,7 +64,7 @@ class RetrofitModule(val app: Application) {
     @Provides
     @Singleton
     fun provideApiInterface(): ApiInterface {
-        return provideRetrofit().create<ApiInterface>(ApiInterface::class.java!!)
+        return provideRetrofit().create<ApiInterface>(ApiInterface::class.java)
     }
 
     @Provides

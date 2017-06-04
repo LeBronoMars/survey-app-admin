@@ -1,10 +1,10 @@
 package avinnovz.com.surveyadmin.helpers
 
 import avinnovz.com.surveyadmin.commons.ApiActions
+import avinnovz.com.surveyadmin.interfaces.ApiInterface
+import avinnovz.com.surveyadmin.interfaces.OnApiRequestListener
 import avinnovz.com.surveyadmin.models.request.Login
 import com.google.gson.Gson
-import proto.com.kotlinapp.interfaces.ApiInterface
-import proto.com.kotlinapp.interfaces.OnApiRequestListener
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -25,8 +25,12 @@ class ApiRequestHelper constructor(val apiInterface: ApiInterface) {
 
     fun myProfile(token: String) {
         onApiRequestListener!!.onApiRequestBegin(ApiActions.GET_MY_PROFILE)
-        handleObservableResult(ApiActions.GET_MY_PROFILE, apiInterface
-                .myProfile(BEARER + token))
+        handleObservableResult(ApiActions.GET_MY_PROFILE, apiInterface.myProfile(BEARER + token))
+    }
+
+    fun getAllDepartments(token: String) {
+        onApiRequestListener!!.onApiRequestBegin(ApiActions.GET_ALL_DEPARTMENTS)
+        handleObservableResult(ApiActions.GET_ALL_DEPARTMENTS, apiInterface.getAllDepartments(BEARER + token))
     }
 
     fun handleObservableResult(action: String?, observable: Observable<*>) {

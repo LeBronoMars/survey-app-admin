@@ -6,4 +6,5 @@ package avinnovz.com.surveyadmin.commons
 object ApiActions {
     val LOGIN = "LOGIN"
     val GET_MY_PROFILE = "GET_MY_PROFILE"
+    val GET_ALL_DEPARTMENTS = "GET_ALL_DEPARTMENTS"
 }

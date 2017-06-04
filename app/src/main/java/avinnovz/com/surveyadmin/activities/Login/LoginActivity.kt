@@ -2,16 +2,15 @@ package avinnovz.com.surveyadmin.activities.Login
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import avinnovz.com.surveyadmin.R
 import avinnovz.com.surveyadmin.activities.Home.HomeActivity
 import avinnovz.com.surveyadmin.base.BaseActivity
 import avinnovz.com.surveyadmin.base.BaseApplication
+import avinnovz.com.surveyadmin.commons.AppConstants
 import avinnovz.com.surveyadmin.models.others.MyProfileManager
 import avinnovz.com.surveyadmin.models.request.Login
 import avinnovz.com.surveyadmin.models.response.MyProfile
 import kotlinx.android.synthetic.main.activity_login.*
-import proto.com.kotlinapp.commons.AppConstants
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginContract.View {

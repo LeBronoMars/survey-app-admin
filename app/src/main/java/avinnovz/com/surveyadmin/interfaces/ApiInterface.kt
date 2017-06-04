@@ -1,6 +1,7 @@
-package proto.com.kotlinapp.interfaces
+package avinnovz.com.surveyadmin.interfaces
 
 import avinnovz.com.surveyadmin.models.request.Login
+import avinnovz.com.surveyadmin.models.response.Department.Departments
 import avinnovz.com.surveyadmin.models.response.MyProfile
 import proto.com.kotlinapp.models.response.LoginResponse
 import retrofit2.http.*
@@ -17,4 +18,7 @@ interface ApiInterface {
 
     @GET("/api/users/me")
     fun myProfile(@Header("Authorization") header: String): Observable<MyProfile>
+
+    @GET("/api/departments")
+    fun getAllDepartments(@Header("Authorization") header: String): Observable<Departments>
 }

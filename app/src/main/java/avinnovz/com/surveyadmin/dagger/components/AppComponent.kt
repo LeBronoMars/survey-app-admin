@@ -2,10 +2,10 @@ package avinnovz.com.surveyadmin.dagger.components
 
 import android.content.Context
 import avinnovz.com.surveyadmin.dagger.modules.RetrofitModule
+import avinnovz.com.surveyadmin.interfaces.ApiInterface
 import avinnovz.com.surveyadmin.models.others.MyProfileManager
 import avinnovz.com.surveyadmin.models.others.TokenManager
 import dagger.Component
-import proto.com.kotlinapp.interfaces.ApiInterface
 import retrofit2.Retrofit
 import javax.inject.Singleton
 

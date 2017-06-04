@@ -2,8 +2,8 @@ package avinnovz.com.surveyadmin.models.response
 
 import android.os.Parcel
 import android.os.Parcelable
+import avinnovz.com.surveyadmin.commons.createParcel
 import com.google.gson.annotations.SerializedName
-import proto.com.kotlinapp.commons.createParcel
 
 /**
  * Created by rsbulanon on 6/4/17.

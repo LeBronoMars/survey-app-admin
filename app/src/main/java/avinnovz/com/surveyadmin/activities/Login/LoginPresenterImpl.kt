@@ -1,14 +1,13 @@
 package avinnovz.com.surveyadmin.activities.Login
 
-import android.util.Log
 import avinnovz.com.surveyadmin.base.BasePresenterImpl
 import avinnovz.com.surveyadmin.commons.ApiActions
 import avinnovz.com.surveyadmin.helpers.ApiRequestHelper
+import avinnovz.com.surveyadmin.interfaces.ApiInterface
+import avinnovz.com.surveyadmin.interfaces.OnApiRequestListener
 import avinnovz.com.surveyadmin.models.others.TokenManager
 import avinnovz.com.surveyadmin.models.request.Login
 import avinnovz.com.surveyadmin.models.response.MyProfile
-import proto.com.kotlinapp.interfaces.ApiInterface
-import proto.com.kotlinapp.interfaces.OnApiRequestListener
 import proto.com.kotlinapp.models.response.GenericResponse
 import proto.com.kotlinapp.models.response.LoginResponse
 import retrofit2.adapter.rxjava.HttpException
@@ -58,7 +57,6 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
     }
 
     override fun onApiRequestFailed(action: String?, t: Throwable) {
-        Log.d("login", "failed request --> ${t.message}")
         view.onDismissLoading()
         val errorMessage: String = t.message!!
 
@@ -77,9 +75,7 @@ class LoginPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: L
                         view.onServerRelatedError()
                     } else {
                         val requestError:GenericResponse = apiRequestHelper!!.parseError(GenericResponse::class.java, json)
-                        requestError?.apply {
-                            view.onShowError(action, "Login Failed", requestError.message, "Close", null)
-                        }
+                        view.onShowError(action, "Login Failed", requestError.message, "Close", null)
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()

@@ -2,9 +2,9 @@ package avinnovz.com.surveyadmin.models.response.Department
 
 import android.os.Parcel
 import android.os.Parcelable
+import avinnovz.com.surveyadmin.commons.createParcel
 import avinnovz.com.surveyadmin.models.response.Member
 import com.google.gson.annotations.SerializedName
-import proto.com.kotlinapp.commons.createParcel
 import java.util.*
 
 /**

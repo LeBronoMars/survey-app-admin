@@ -2,7 +2,7 @@ package proto.com.kotlinapp.models.response
 
 import android.os.Parcel
 import android.os.Parcelable
-import proto.com.kotlinapp.commons.createParcel
+import avinnovz.com.surveyadmin.commons.createParcel
 
 /**
  * Created by rsbulanon on 6/3/17.

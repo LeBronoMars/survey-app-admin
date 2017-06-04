@@ -1,6 +1,6 @@
 @file:JvmName("ExtensionsUtils")
 
-package proto.com.kotlinapp.commons
+package avinnovz.com.surveyadmin.commons
 
 import android.os.Parcel
 import android.os.Parcelable
