@@ -2,6 +2,8 @@ package avinnovz.com.surveyadmin.dagger.components
 
 import android.content.Context
 import avinnovz.com.surveyadmin.dagger.modules.RetrofitModule
+import avinnovz.com.surveyadmin.models.others.MyProfileManager
+import avinnovz.com.surveyadmin.models.others.TokenManager
 import dagger.Component
 import proto.com.kotlinapp.interfaces.ApiInterface
 import retrofit2.Retrofit
@@ -18,4 +20,6 @@ interface AppComponent {
     fun apiInterface(): ApiInterface
     fun retrofit(): Retrofit
     fun context(): Context
+    fun tokenManager() : TokenManager
+    fun myProfileManager(): MyProfileManager
 }
