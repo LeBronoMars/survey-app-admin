@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import avinnovz.com.surveyadmin.R
+import avinnovz.com.surveyadmin.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
 
         bnv_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
