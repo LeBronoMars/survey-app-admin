@@ -15,6 +15,7 @@
     <!-- bottom sheet group menu -->
     <string name="manage_members">Manage Members</string>
     <string name="update_group">Update Group</string>
+    <string name="delete_group">Delete Group</string>
 
     <!-- manage group -->
     <string name="create_group_header">Add new group</string>

@@ -39,6 +39,17 @@ class ApiRequestHelper constructor(val apiInterface: ApiInterface) {
         handleObservableResult(ApiActions.POST_ADD_DEPARTMENT, apiInterface.createDepartment(BEARER + token, newDepartment))
     }
 
+    fun deleteDepartment(token: String, departmentId: String) {
+        onApiRequestListener!!.onApiRequestBegin(ApiActions.DELETE_DEPARTMENT)
+        handleObservableResult(ApiActions.DELETE_DEPARTMENT, apiInterface.deleteDepartment(BEARER + token, departmentId))
+    }
+
+    fun updateDepartment(token: String, departmentId: String, newDepartment: NewDepartment) {
+        onApiRequestListener!!.onApiRequestBegin(ApiActions.PUT_UPDATE_DEPARTMENT)
+        handleObservableResult(ApiActions.PUT_UPDATE_DEPARTMENT, apiInterface
+                .updateDepartment(BEARER + token, departmentId, newDepartment))
+    }
+
     fun handleObservableResult(action: String?, observable: Observable<*>) {
         observable.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe({ result -> onApiRequestListener!!.onApiRequestSuccess(action, result) },

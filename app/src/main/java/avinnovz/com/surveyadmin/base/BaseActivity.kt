@@ -110,7 +110,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (positiveText != null && !positiveText.isEmpty()) {
             alertDialogBuilder.setPositiveButton(positiveText) { dialog, _ ->
                 onConfirmDialogListener?.apply {
-                    onConfirmed(action!!)
+                    onConfirmed(action)
                 }
                 dialog.cancel()
             }

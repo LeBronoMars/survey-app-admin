@@ -51,6 +51,27 @@ class GroupsPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: 
         }
     }
 
+
+    override fun onUpdateDepartment(departmentId: String, newDepartment: NewDepartment) {
+        if (isNetworkAvailable()) {
+            apiRequestHelper?.apply {
+                updateDepartment(tokenManager.loginResponse!!.token, departmentId, newDepartment)
+            }
+        } else {
+            view.onNoConnectionError()
+        }
+    }
+
+    override fun onDeleteDepartment(departmentId: String) {
+        if (isNetworkAvailable()) {
+            apiRequestHelper?.apply {
+                deleteDepartment(tokenManager.loginResponse!!.token, departmentId)
+            }
+        } else {
+            view.onNoConnectionError()
+        }
+    }
+
     override fun onApiRequestBegin(action: String?) {
         view.onShowLoading()
     }
@@ -92,6 +113,10 @@ class GroupsPresenterImpl @Inject constructor(apiInterface: ApiInterface, view: 
             view.onLoadAllDepartments(result as Departments)
         } else if (action!!.equals(ApiActions.POST_ADD_DEPARTMENT)) {
             view.onLoadNewDepartment(result as DepartmentData)
+        } else if (action!!.equals(ApiActions.PUT_UPDATE_DEPARTMENT)) {
+            view.onLoadUpdatedDepartment(result as DepartmentData)
+        } else if (action!!.equals(ApiActions.DELETE_DEPARTMENT)) {
+            view.onRemoveDeletedDepartment()
         }
     }
 

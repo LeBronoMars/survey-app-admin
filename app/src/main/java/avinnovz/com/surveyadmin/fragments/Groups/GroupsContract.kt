@@ -14,11 +14,19 @@ interface GroupsContract {
         fun onLoadAllDepartments(departments: Departments)
 
         fun onLoadNewDepartment(departmentData: DepartmentData)
+
+        fun onLoadUpdatedDepartment(departmentData: DepartmentData)
+
+        fun onRemoveDeletedDepartment()
     }
 
     interface Presenter {
         fun onGetAllDepartments()
 
         fun onCreateNewDepartment(newDepartment: NewDepartment)
+
+        fun onUpdateDepartment(departmentId: String, newDepartment: NewDepartment)
+
+        fun onDeleteDepartment(departmentId: String)
     }
 }

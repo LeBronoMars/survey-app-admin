@@ -3,10 +3,17 @@
 
     <item
         android:id="@+id/menu_manage_member"
+        android:icon="@drawable/manage_members"
         android:title="@string/manage_members" />
 
     <item
         android:id="@+id/menu_update_group"
+        android:icon="@drawable/pencil"
         android:title="@string/update_group" />
+
+    <item
+        android:id="@+id/menu_remove_group"
+        android:icon="@drawable/trash_bin"
+        android:title="@string/delete_group" />
 
 </menu>
